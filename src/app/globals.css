@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffbfc;
+  --foreground: #1a1a2e;
+  --accent: #e91e8c;
+  --accent-light: #f472b6;
+  --accent-pale: #fce7f3;
+  --muted: #9ca3af;
+  --border: rgba(233, 30, 140, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(233, 30, 140, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-pale: var(--accent-pale);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Gradient background blobs */
+.bg-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-blobs::before,
+.bg-blobs::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+}
+
+.bg-blobs::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #f9a8d4 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.bg-blobs::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #fbcfe8 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(233, 30, 140, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(233, 30, 140, 0.12);
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+/* Section divider */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(233, 30, 140, 0.2), transparent);
+}
+
+/* Pink gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #e91e8c, #f472b6, #e91e8c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pink glow */
+.pink-glow {
+  box-shadow: 0 0 40px rgba(233, 30, 140, 0.08);
+}
+
+/* Tag style */
+.tag-pink {
+  background: rgba(252, 231, 243, 0.7);
+  color: #be185d;
+  backdrop-filter: blur(8px);
 }
